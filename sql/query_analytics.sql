@@ -1,24 +1,14 @@
 CREATE OR REPLACE TABLE `uber-project-386415.uber_analysis.tbl_analytics` AS (
 SELECT 
-  f.trip_id,
-  f.VendorID,
-  d.tpep_pickup_datetime,
-  d.tpep_dropoff_datetime,
+  f.trip_id, f.VendorID,
+  d.tpep_pickup_datetime, d.tpep_dropoff_datetime,
   p.passenger_count,
   t.trip_distance,
   r.rate_code_name,
-  pick.pickup_latitude,
-  pick.pickup_longitude,
-  drop.dropoff_latitude,
-  drop.dropoff_longitude,
+  pick.pickup_latitude, pick.pickup_longitude,
+  drop.dropoff_latitude, drop.dropoff_longitude,
   pay.payment_name,
-  f.fare_amount,
-  f.extra,
-  f.mta_tax,
-  f.tip_amount,
-  f.tolls_amount,
-  f.improvement_surcharge,
-  f.total_amount
+  f.fare_amount, f.extra, f.mta_tax, f.tip_amount, f.tolls_amount, f.improvement_surcharge, f.total_amount
 FROM 
   `uber-project-386415.uber_analysis.fact_table` f
   JOIN `uber-project-386415.uber_analysis.datetime_dim` d  ON f.datetime_id=d.datetime_id
@@ -27,5 +17,4 @@ FROM
   JOIN `uber-project-386415.uber_analysis.rate_code_dim` r ON r.rate_code_id=f.rate_code_id  
   JOIN `uber-project-386415.uber_analysis.pickup_location_dim` pick ON pick.pickup_location_id=f.pickup_location_id
   JOIN `uber-project-386415.uber_analysis.dropoff_location_dim` drop ON drop.dropoff_location_id=f.dropoff_location_id
-  JOIN `uber-project-386415.uber_analysis.payment_type_dim` pay ON pay.payment_type_id=f.payment_type_id)
-;
+  JOIN `uber-project-386415.uber_analysis.payment_type_dim` pay ON pay.payment_type_id=f.payment_type_id);
